@@ -81,10 +81,10 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 typedef enum{
-	INPUT_PORT = 0x00, //Read byte XXXX XXXX
-	OUTPUT_PORT = 0x01, //Read/write byte 1111 1111
-	POLARITY_INVERSION = 0x02, //Read/write byte 0000 0000
-	CONFIG = 0x03 //Read/write byte 1111 1111
+	INPUT_PORT = 0x00,
+	OUTPUT_PORT = 0x01, 
+	POLARITY_INVERSION = 0x02,
+	CONFIG = 0x03 
 	}pca9538_regs_t;
 
 #define KB_ADDR 0xE2
@@ -94,7 +94,7 @@ typedef enum{
 			HAL_StatusTypeDef status = HAL_I2C_Mem_Write(&hi2c1,KB_ADDR & 0xFFFE, OUTPUT_PORT, 1, &char_buff, 1,100);
 
 			if (status != HAL_OK)
-						return -1;
+				return -1;
 
 			HAL_I2C_Mem_Write(&hi2c1,KB_ADDR, CONFIG, 1,&row, 1, 100);
 
@@ -103,7 +103,7 @@ typedef enum{
 			status = HAL_I2C_Mem_Read(&hi2c1, KB_ADDR | 1, INPUT_PORT, 1,&col_buff, 1,100);
 
 			if (status != HAL_OK)
-					return -1;
+				return -1;
 
 return col_buff;
 }
@@ -184,7 +184,7 @@ int main(void)
 				oled_SetCursor(0,0);
 				oled_WriteString(buf,Font_11x18,White);
 				oled_UpdateScreen();
-				prevent_from_drebezg = HAL_GetTick(); // prevent user from pressing again
+				prevent_from_drebezg = HAL_GetTick(); 
   }
 
 	if (((col >> 1) & 1) == 0 &&!prevent_from_drebezg_stop) {
